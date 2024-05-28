@@ -1,0 +1,41 @@
+[2024-05-27 20:29:58] [ INFO ] [BD:30] tabla creada con exito
+[2024-05-27 20:39:49] [ INFO ] [PacienteDAOH2:29] inicando la operacion de guardado
+[2024-05-27 20:39:49] [ INFO ] [DomicilioDaoH2:24] iniciando la operacion de : Guardado de un domicilio
+[2024-05-27 20:39:49] [ INFO ] [PacienteDAOH2:47] paciente guardado con exito
+[2024-05-27 20:43:09] [ INFO ] [BD:30] tabla creada con exito
+[2024-05-27 20:48:44] [ INFO ] [BD:30] tabla creada con exito
+[2024-05-27 20:49:27] [ INFO ] [PacienteDAOH2:58] iniciando la busqueda de un paciente por id: 1
+[2024-05-27 20:49:27] [ INFO ] [DomicilioDaoH2:49] iniciando la operacion de : Buscado de un domicilio
+[2024-05-27 20:51:15] [ INFO ] [BD:30] tabla creada con exito
+[2024-05-27 20:51:58] [ INFO ] [BD:30] tabla creada con exito
+[2024-05-27 20:52:24] [ INFO ] [PacienteDAOH2:114] iniciando la busqueda de todos los pacientes
+[2024-05-27 20:52:24] [ INFO ] [DomicilioDaoH2:49] iniciando la operacion de : Buscado de un domicilio
+[2024-05-27 20:52:24] [ INFO ] [DomicilioDaoH2:49] iniciando la operacion de : Buscado de un domicilio
+[2024-05-27 20:58:16] [ INFO ] [BD:30] tabla creada con exito
+[2024-05-27 21:01:51] [ INFO ] [BD:30] tabla creada con exito
+[2024-05-27 21:03:24] [ INFO ] [BD:30] tabla creada con exito
+[2024-05-27 21:03:33] [ INFO ] [PacienteDAOH2:29] inicando la operacion de guardado
+[2024-05-27 21:03:33] [ INFO ] [DomicilioDaoH2:24] iniciando la operacion de : Guardado de un domicilio
+[2024-05-27 21:03:33] [ INFO ] [PacienteDAOH2:47] paciente guardado con exito
+[2024-05-27 21:03:38] [ INFO ] [PacienteDAOH2:136] iniciando la busqueda de todos los pacientes
+[2024-05-27 21:03:38] [ INFO ] [DomicilioDaoH2:49] iniciando la operacion de : Buscado de un domicilio
+[2024-05-27 21:03:38] [ INFO ] [DomicilioDaoH2:49] iniciando la operacion de : Buscado de un domicilio
+[2024-05-27 21:03:38] [ INFO ] [DomicilioDaoH2:49] iniciando la operacion de : Buscado de un domicilio
+[2024-05-27 21:04:29] [ INFO ] [PacienteDAOH2:136] iniciando la busqueda de todos los pacientes
+[2024-05-27 21:04:29] [ INFO ] [DomicilioDaoH2:49] iniciando la operacion de : Buscado de un domicilio
+[2024-05-27 21:04:29] [ INFO ] [DomicilioDaoH2:49] iniciando la operacion de : Buscado de un domicilio
+[2024-05-27 21:04:29] [ INFO ] [DomicilioDaoH2:49] iniciando la operacion de : Buscado de un domicilio
+[2024-05-27 21:06:23] [ INFO ] [PacienteDAOH2:58] iniciando la busqueda de un paciente por id: 1
+[2024-05-27 21:06:23] [ INFO ] [DomicilioDaoH2:49] iniciando la operacion de : Buscado de un domicilio
+[2024-05-27 21:06:23] [ INFO ] [PacienteDAOH2:109] Iniciando la eliminación del paciente con id: 1
+[2024-05-27 21:06:23] [ INFO ] [PacienteDAOH2:117] Paciente con id 1 eliminado con éxito.
+[2024-05-27 21:06:30] [ INFO ] [PacienteDAOH2:136] iniciando la busqueda de todos los pacientes
+[2024-05-27 21:06:30] [ INFO ] [DomicilioDaoH2:49] iniciando la operacion de : Buscado de un domicilio
+[2024-05-27 21:06:30] [ INFO ] [DomicilioDaoH2:49] iniciando la operacion de : Buscado de un domicilio
+[2024-05-27 21:07:57] [ INFO ] [BD:30] tabla creada con exito
+[2024-05-27 21:08:00] [ INFO ] [PacienteDAOH2:160] iniciando la busqueda de todos los pacientes
+[2024-05-27 21:08:00] [ INFO ] [DomicilioDaoH2:49] iniciando la operacion de : Buscado de un domicilio
+[2024-05-27 21:08:00] [ INFO ] [DomicilioDaoH2:49] iniciando la operacion de : Buscado de un domicilio
+[2024-05-27 21:08:06] [ INFO ] [PacienteDAOH2:29] inicando la operacion de guardado
+[2024-05-27 21:08:06] [ INFO ] [DomicilioDaoH2:24] iniciando la operacion de : Guardado de un domicilio
+[2024-05-27 21:08:06] [ INFO ] [PacienteDAOH2:47] paciente guardado con exito

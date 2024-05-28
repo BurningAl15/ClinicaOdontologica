@@ -1,0 +1,20 @@
+[2024-05-27 21:47:56] [ INFO ] [BD:35] tabla creada con exito
+[2024-05-27 21:51:25] [ INFO ] [OdontologoDaoH2:28] inicando la operacion de guardado
+[2024-05-27 21:51:25] [ WARN ] [OdontologoDaoH2:39] Cannot invoke "java.lang.Integer.intValue()" because the return value of "BackEndC2.ClinicaOdontologica.model.Odontologo.getNumeroMatricula()" is null
+[2024-05-27 21:51:41] [ INFO ] [OdontologoDaoH2:28] inicando la operacion de guardado
+[2024-05-27 21:51:41] [ WARN ] [OdontologoDaoH2:39] Cannot invoke "java.lang.Integer.intValue()" because the return value of "BackEndC2.ClinicaOdontologica.model.Odontologo.getNumeroMatricula()" is null
+[2024-05-27 21:52:13] [ INFO ] [BD:35] tabla creada con exito
+[2024-05-27 21:52:22] [ INFO ] [OdontologoDaoH2:28] inicando la operacion de guardado
+[2024-05-27 21:52:22] [ WARN ] [OdontologoDaoH2:39] Cannot invoke "java.lang.Integer.intValue()" because the return value of "BackEndC2.ClinicaOdontologica.model.Odontologo.getNumeroMatricula()" is null
+[2024-05-27 21:53:00] [ INFO ] [OdontologoDaoH2:28] inicando la operacion de guardado
+[2024-05-27 21:53:29] [ INFO ] [OdontologoDaoH2:46] iniciando la busqueda de un paciente por id: 1
+[2024-05-27 21:53:33] [ INFO ] [OdontologoDaoH2:46] iniciando la busqueda de un paciente por id: 1
+[2024-05-27 21:53:33] [ INFO ] [OdontologoDaoH2:95] Iniciando la eliminación del odontologo con id: 1
+[2024-05-27 21:53:33] [ INFO ] [OdontologoDaoH2:103] Odontologo con id 1 eliminado con éxito.
+[2024-05-27 21:56:02] [ INFO ] [BD:35] tabla creada con exito
+[2024-05-27 21:56:23] [ INFO ] [OdontologoDaoH2:27] inicando la operacion de guardado
+[2024-05-27 21:56:23] [ INFO ] [OdontologoDaoH2:42] odontologo guardado con exito
+[2024-05-27 21:56:29] [ INFO ] [OdontologoDaoH2:51] iniciando la busqueda de un paciente por id: 1
+[2024-05-27 21:56:48] [ INFO ] [OdontologoDaoH2:27] inicando la operacion de guardado
+[2024-05-27 21:56:48] [ INFO ] [OdontologoDaoH2:42] odontologo guardado con exito
+[2024-05-27 21:56:57] [ INFO ] [OdontologoDaoH2:51] iniciando la busqueda de un paciente por id: 2
