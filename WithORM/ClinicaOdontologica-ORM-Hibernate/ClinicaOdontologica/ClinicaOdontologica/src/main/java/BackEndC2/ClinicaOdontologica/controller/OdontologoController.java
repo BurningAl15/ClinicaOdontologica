@@ -33,8 +33,8 @@ public class OdontologoController {
         return ResponseEntity.ok(odontologoService.buscarTodos());
     }
 
-    @PutMapping
-    public ResponseEntity<String> actualizarOdontologo(@RequestBody Odontologo odontologo){
+    @PutMapping("/{id}")
+    public ResponseEntity<String> actualizarOdontologo(@PathVariable Long id, @RequestBody Odontologo odontologo){
         //necesitamos primeramente validar si existe o  no
         Optional<Odontologo> odontologoBuscado= odontologoService.buscarPorID(odontologo.getId());
         if(odontologoBuscado.isPresent()){
@@ -45,7 +45,7 @@ public class OdontologoController {
         }
     }
 
-    @DeleteMapping("/eliminar/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminarOdontologo(@PathVariable Long id){
         Optional<Odontologo> odontologoBuscado= odontologoService.buscarPorID(id);
         if(odontologoBuscado.isPresent()){

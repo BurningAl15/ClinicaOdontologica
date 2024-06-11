@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController //cambiamos pq no necesitamos tecnologia de vista.
-@RequestMapping("/paciente")
+@RequestMapping("/pacientes")
 public class PacienteController {
    @Autowired
     private PacienteService pacienteService;
@@ -30,8 +30,8 @@ public class PacienteController {
        }
     }
 
-    @PutMapping
-    public ResponseEntity<String> actualizarPaciente(@RequestBody Paciente paciente){
+    @PutMapping("/{id}")
+    public ResponseEntity<String> actualizarPaciente(@PathVariable Long id, @RequestBody Paciente paciente){
         //necesitamos primeramente validar si existe o  no
         Optional<Paciente> pacienteBuscado= pacienteService.buscarPorID(paciente.getId());
         if(pacienteBuscado.isPresent()){
@@ -42,7 +42,7 @@ public class PacienteController {
         }
 
     }
-    @GetMapping("/{email}")
+    @GetMapping("/email/{email}")
     public ResponseEntity<Paciente> buscarPorEmail(@PathVariable String email){
         Optional<Paciente> pacienteBuscado= pacienteService.buscarPorEmail(email);
         if(pacienteBuscado.isPresent()){
@@ -56,7 +56,7 @@ public class PacienteController {
         return ResponseEntity.ok(pacienteService.buscarTodos());
     }
 
-    @DeleteMapping("/eliminar/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminarPaciente(@PathVariable Long id){
         Optional<Paciente> pacienteBuscado= pacienteService.buscarPorID(id);
         if(pacienteBuscado.isPresent()){

@@ -23,7 +23,7 @@ public class TurnoService {
     public Optional<Turno> buscarPorID(Long id){
         return turnoRepository.findById(id);
     }
-    public void eliminarOdontologo(Long id){
+    public void eliminarTurno(Long id){
         turnoRepository.deleteById(id);
     }
     public List<Turno> buscarTodos(){
