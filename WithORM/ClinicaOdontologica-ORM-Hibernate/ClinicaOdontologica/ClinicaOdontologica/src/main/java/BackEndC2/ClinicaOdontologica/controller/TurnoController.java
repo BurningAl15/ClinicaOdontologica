@@ -3,6 +3,7 @@ package BackEndC2.ClinicaOdontologica.controller;
 import BackEndC2.ClinicaOdontologica.entity.Odontologo;
 import BackEndC2.ClinicaOdontologica.entity.Paciente;
 import BackEndC2.ClinicaOdontologica.entity.Turno;
+import BackEndC2.ClinicaOdontologica.exception.ResourceNotFoundException;
 import BackEndC2.ClinicaOdontologica.service.OdontologoService;
 import BackEndC2.ClinicaOdontologica.service.PacienteService;
 import BackEndC2.ClinicaOdontologica.service.TurnoService;
@@ -59,28 +60,33 @@ public class TurnoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Turno> buscarTurnoPorId(@PathVariable Long id){
+    public ResponseEntity<Turno> buscarTurnoPorId(@PathVariable Long id) throws ResourceNotFoundException {
         Optional<Turno> turnoBuscado = turnoService.buscarPorID(id);
         if(turnoBuscado.isPresent()){
             return ResponseEntity.ok(turnoBuscado.get());
         }else{
-            return ResponseEntity.notFound().build();
+            throw new ResourceNotFoundException("No existe odontologo con id : "+id);
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> actualizarTurno(@PathVariable Long id, @RequestBody Turno turno){
+    public ResponseEntity<Turno> actualizarTurno(@PathVariable Long id, @RequestBody Turno turno) throws ResourceNotFoundException {
         Optional<Turno> turnoExistenteOpt = turnoService.buscarPorID(id);
+
+        Long pacienteId = (long) -1;
+        Long odontologoId = (long) -1;
+        
+        
         if (turnoExistenteOpt.isPresent()) {
             Turno turnoExistente = turnoExistenteOpt.get();
 
-            Long pacienteId = turno.getPaciente().getId();
-            Long odontologoId = turno.getOdontologo().getId();
+            pacienteId = turno.getPaciente().getId();
+            odontologoId = turno.getOdontologo().getId();
 
             Optional<Paciente> pacienteOpt = pacienteService.buscarPorID(pacienteId);
             Optional<Odontologo> odontologoOpt = odontologoService.buscarPorID(odontologoId);
 
-            if (pacienteOpt.isPresent() && odontologoOpt.isPresent()) {
+            /*if (pacienteOpt.isPresent() && odontologoOpt.isPresent()) {
                 Paciente paciente = pacienteOpt.get();
                 Odontologo odontologo = odontologoOpt.get();
 
@@ -93,14 +99,34 @@ public class TurnoController {
                 return ResponseEntity.ok(turnoActualizado);
             } else {
                 return ResponseEntity.badRequest().body("Paciente o Odontologo no encontrado");
+            }*/
+            
+            if(pacienteId == -1 ){
+                throw new ResourceNotFoundException("No existe paciente con id : "+id);
             }
+            else if(odontologoId == -1) {
+                throw new ResourceNotFoundException("No existe odontologo con id : "+id);
+            }
+            else{
+                Paciente paciente = pacienteOpt.get();
+                Odontologo odontologo = odontologoOpt.get();
+
+                turnoExistente.setPaciente(paciente);
+                turnoExistente.setOdontologo(odontologo);
+                turnoExistente.setFecha(turno.getFecha());
+
+                Turno turnoActualizado = turnoService.guardarTurno(turnoExistente);
+
+                return ResponseEntity.ok(turnoActualizado);
+            }
+            
         } else {
-            return ResponseEntity.notFound().build();
+            throw new ResourceNotFoundException("No existe turno con id : "+id);
         }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> eliminarTurno(@PathVariable Long id){
+    public ResponseEntity<String> eliminarTurno(@PathVariable Long id) throws ResourceNotFoundException {
         Optional<Turno> turnoBuscado = turnoService.buscarPorID(id);
 
         Long pacienteId = turnoBuscado.get().getPaciente().getId();
@@ -115,7 +141,7 @@ public class TurnoController {
             turnoService.eliminarTurno(id);
             return ResponseEntity.ok("Turno eliminado con exito");
         }else{
-            return ResponseEntity.badRequest().body("paciente no encontrado");
+            throw new ResourceNotFoundException("No existe odontologo con id : "+id);
         }
     }
 }
