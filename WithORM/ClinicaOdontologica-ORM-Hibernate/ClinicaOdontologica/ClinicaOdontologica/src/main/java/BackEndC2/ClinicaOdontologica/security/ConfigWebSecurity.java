@@ -21,6 +21,10 @@ public class ConfigWebSecurity {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    @Autowired
+    private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
+
+
     @Bean //este metodo va a proveernos de la autenticacion de la aplicacion
     public DaoAuthenticationProvider daoAuthenticationProvider(){
         DaoAuthenticationProvider provider= new DaoAuthenticationProvider();
@@ -35,10 +39,13 @@ public class ConfigWebSecurity {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authz) -> authz
-                .requestMatchers("/get_turnos_user.html").hasRole("USER")
-                .anyRequest().hasRole("ADMIN")
+                    .requestMatchers("/get_turnos_user.html").hasRole("USER")
+                    .anyRequest().hasRole("ADMIN")
                 )
-                .formLogin(withDefaults())
+                //.formLogin(withDefaults())
+                .formLogin(form -> form
+                        .successHandler(customAuthenticationSuccessHandler)
+                )
                 .logout(withDefaults());
         return http.build();
     }
