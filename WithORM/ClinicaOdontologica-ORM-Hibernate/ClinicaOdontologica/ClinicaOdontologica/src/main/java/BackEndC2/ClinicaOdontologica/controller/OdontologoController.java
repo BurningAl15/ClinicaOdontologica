@@ -20,6 +20,7 @@ public class OdontologoController {
     public ResponseEntity<Odontologo> registrarUnOdontologo(@RequestBody Odontologo odontologo){
         return ResponseEntity.ok(odontologoService.guardarOdontologo(odontologo));
     }
+    
     @GetMapping("/{id}")
     public ResponseEntity<Odontologo> buscarOdontologoPorId(@PathVariable Long id) throws ResourceNotFoundException {
         Optional<Odontologo> odontologoBuscado= odontologoService.buscarPorID(id);

@@ -3,6 +3,7 @@ package BackEndC2.ClinicaOdontologica.controller;
 import BackEndC2.ClinicaOdontologica.entity.Odontologo;
 import BackEndC2.ClinicaOdontologica.entity.Paciente;
 import BackEndC2.ClinicaOdontologica.entity.Turno;
+import BackEndC2.ClinicaOdontologica.exception.BadRequestException;
 import BackEndC2.ClinicaOdontologica.exception.ResourceNotFoundException;
 import BackEndC2.ClinicaOdontologica.service.OdontologoService;
 import BackEndC2.ClinicaOdontologica.service.PacienteService;
@@ -25,10 +26,15 @@ public class TurnoController {
     private OdontologoService odontologoService;
 
     @PostMapping
-    public ResponseEntity<?> guardarTurno(@RequestBody Turno turno){
-        Long pacienteId = turno.getPaciente().getId();
-        Long odontologoId = turno.getOdontologo().getId();
+    public ResponseEntity<?> guardarTurno(@RequestBody Turno turno) throws BadRequestException {
+        Long pacienteId = (long) -1;
+        Long odontologoId = (long) -1;
 
+        if(turno.getPaciente() != null)
+            pacienteId = turno.getPaciente().getId();
+        if(turno.getOdontologo() != null)
+            odontologoId = turno.getOdontologo().getId();
+        
         Optional<Paciente> pacienteOpt = pacienteService.buscarPorID(pacienteId);
         Optional<Odontologo> odontologoOpt = odontologoService.buscarPorID(odontologoId);
 
@@ -45,12 +51,14 @@ public class TurnoController {
         } else {
             // Log para depuración
             if (!pacienteOpt.isPresent()) {
-                System.out.println("Paciente no encontrado.");
+                throw new BadRequestException("Error al registrar turno, paciente incorrecto");
+                //System.out.println("Paciente no encontrado.");
             }
             if (!odontologoOpt.isPresent()) {
-                System.out.println("Odontologo no encontrado.");
+                throw new BadRequestException("Error al registrar turno, odontologo incorrecto");
+                //System.out.println("Odontologo no encontrado.");
             }
-            return ResponseEntity.badRequest().body("Paciente o Odontologo no encontrado");
+            throw new BadRequestException("Error al registrar turno, paciente y odontologo incorrecto");
         }
     }
 
@@ -86,21 +94,6 @@ public class TurnoController {
             Optional<Paciente> pacienteOpt = pacienteService.buscarPorID(pacienteId);
             Optional<Odontologo> odontologoOpt = odontologoService.buscarPorID(odontologoId);
 
-            /*if (pacienteOpt.isPresent() && odontologoOpt.isPresent()) {
-                Paciente paciente = pacienteOpt.get();
-                Odontologo odontologo = odontologoOpt.get();
-
-                turnoExistente.setPaciente(paciente);
-                turnoExistente.setOdontologo(odontologo);
-                turnoExistente.setFecha(turno.getFecha());
-
-                Turno turnoActualizado = turnoService.guardarTurno(turnoExistente);
-
-                return ResponseEntity.ok(turnoActualizado);
-            } else {
-                return ResponseEntity.badRequest().body("Paciente o Odontologo no encontrado");
-            }*/
-            
             if(pacienteId == -1 ){
                 throw new ResourceNotFoundException("No existe paciente con id : "+id);
             }
