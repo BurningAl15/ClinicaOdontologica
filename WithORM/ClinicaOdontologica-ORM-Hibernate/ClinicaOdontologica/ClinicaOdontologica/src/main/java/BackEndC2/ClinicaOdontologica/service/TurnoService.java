@@ -56,16 +56,16 @@ public class TurnoService {
         TurnoDTO turnoDTO= new TurnoDTO();
         turnoDTO.setId(turno.getId());
         turnoDTO.setFecha(turno.getFecha());
-        turnoDTO.setPacienteId(turno.getPaciente().getId());
-        turnoDTO.setOdontologoId(turno.getOdontologo().getId());
+        turnoDTO.setPaciente(turno.getPaciente());
+        turnoDTO.setOdontologo(turno.getOdontologo());
         return turnoDTO;
     }
     public Turno turnodtoAturno(TurnoDTO turnoDTO){
         Turno turno= new Turno();
         Odontologo odontologo= new Odontologo();
         Paciente paciente= new Paciente();
-        odontologo.setId(turnoDTO.getOdontologoId());
-        paciente.setId(turnoDTO.getPacienteId());
+        odontologo.setId(turnoDTO.getOdontologo().getId());
+        paciente.setId(turnoDTO.getPaciente().getId());
         turno.setId(turnoDTO.getId());
         turno.setFecha(turnoDTO.getFecha());
         turno.setPaciente(paciente);

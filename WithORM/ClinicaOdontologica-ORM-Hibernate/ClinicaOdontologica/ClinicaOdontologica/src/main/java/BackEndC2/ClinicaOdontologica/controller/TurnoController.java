@@ -127,8 +127,8 @@ public class TurnoController {
     public ResponseEntity<String> eliminarTurno(@PathVariable Long id) throws ResourceNotFoundException {
         Optional<TurnoDTO> turnoBuscado = turnoService.buscarTurnoDTOId(id);
 
-        Long pacienteId = turnoBuscado.get().getPacienteId();
-        Long odontologoId = turnoBuscado.get().getOdontologoId();
+        Long pacienteId = turnoBuscado.get().getPaciente().getId();
+        Long odontologoId = turnoBuscado.get().getOdontologo().getId();
 
         Optional<Paciente> pacienteOpt = pacienteService.buscarPorID(pacienteId);
         Optional<Odontologo> odontologoOpt = odontologoService.buscarPorID(odontologoId);

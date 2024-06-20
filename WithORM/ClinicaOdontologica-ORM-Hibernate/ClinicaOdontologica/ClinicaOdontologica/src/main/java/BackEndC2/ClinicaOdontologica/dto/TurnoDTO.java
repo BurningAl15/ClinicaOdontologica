@@ -1,12 +1,31 @@
 package BackEndC2.ClinicaOdontologica.dto;
 
+import BackEndC2.ClinicaOdontologica.entity.Odontologo;
+import BackEndC2.ClinicaOdontologica.entity.Paciente;
+
 import java.time.LocalDate;
 
 public class TurnoDTO {
     private Long id;
     private LocalDate fecha;
-    private Long pacienteId;
-    private Long odontologoId;
+    private Paciente paciente;
+    private Odontologo odontologo;
+
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
+    }
+
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public Odontologo getOdontologo() {
+        return odontologo;
+    }
+
+    public void setOdontologo(Odontologo odontologo) {
+        this.odontologo = odontologo;
+    }
 
     public Long getId() {
         return id;
@@ -24,19 +43,5 @@ public class TurnoDTO {
         this.fecha = fecha;
     }
 
-    public Long getPacienteId() {
-        return pacienteId;
-    }
 
-    public void setPacienteId(Long pacienteId) {
-        this.pacienteId = pacienteId;
-    }
-
-    public Long getOdontologoId() {
-        return odontologoId;
-    }
-
-    public void setOdontologoId(Long odontologoId) {
-        this.odontologoId = odontologoId;
-    }
 }
