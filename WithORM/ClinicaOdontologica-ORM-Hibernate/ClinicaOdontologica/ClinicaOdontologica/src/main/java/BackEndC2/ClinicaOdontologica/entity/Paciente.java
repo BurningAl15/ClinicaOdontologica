@@ -10,6 +10,7 @@ public class Paciente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column
     private String nombre;
     @Column
@@ -89,5 +90,9 @@ public class Paciente {
                 ", domicilio=" + domicilio +
                 ", email='" + email + '\'' +
                 '}';
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 }
