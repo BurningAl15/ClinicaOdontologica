@@ -11,6 +11,9 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import org.springframework.security.config.Customizer;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
 import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
@@ -49,4 +52,20 @@ public class ConfigWebSecurity {
                 .logout(withDefaults());
         return http.build();
     }
+
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .authorizeRequests()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin(Customizer.withDefaults())
+                .logout(logout ->
+                        logout
+                                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")) // logout endpoint
+                                .logoutSuccessUrl("/login?logout") // redirect to this URL after logout
+                                .invalidateHttpSession(true) // invalidate session
+                                .deleteCookies("JSESSIONID") // delete cookies
+                ); // disable CSRF for simplicity; enable if needed
+    }
+ 
 }
