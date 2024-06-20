@@ -37,11 +37,13 @@ public class ConfigWebSecurity {
     }
 
 
-   @Bean
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authz) -> authz
+                    .requestMatchers("/js/**", "/css/**", "/images/**").permitAll() // Allow access to static resources
+                    .requestMatchers("/turnos").hasAnyRole("USER", "ADMIN") 
                     .requestMatchers("/get_turnos_user.html").hasRole("USER")
                     .anyRequest().hasRole("ADMIN")
                 )

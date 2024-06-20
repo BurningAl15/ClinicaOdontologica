@@ -1,6 +1,5 @@
 package BackEndC2.ClinicaOdontologica.controller;
 
-import BackEndC2.ClinicaOdontologica.dto.TurnoDTO;
 import BackEndC2.ClinicaOdontologica.entity.Odontologo;
 import BackEndC2.ClinicaOdontologica.entity.Paciente;
 import BackEndC2.ClinicaOdontologica.entity.Turno;
@@ -27,7 +26,7 @@ public class TurnoController {
     private OdontologoService odontologoService;
 
     @PostMapping
-    public ResponseEntity<TurnoDTO> guardarTurno(@RequestBody Turno turno) throws BadRequestException {
+    public ResponseEntity<?> guardarTurno(@RequestBody Turno turno) throws BadRequestException {
         Long pacienteId = (long) -1;
         Long odontologoId = (long) -1;
 
@@ -35,6 +34,8 @@ public class TurnoController {
             pacienteId = turno.getPaciente().getId();
         if(turno.getOdontologo() != null)
             odontologoId = turno.getOdontologo().getId();
+
+        System.out.println(">>> TURNO: " + turno.toString());
         
         Optional<Paciente> pacienteOpt = pacienteService.buscarPorID(pacienteId);
         Optional<Odontologo> odontologoOpt = odontologoService.buscarPorID(odontologoId);
@@ -46,7 +47,8 @@ public class TurnoController {
             turno.setPaciente(paciente);
             turno.setOdontologo(odontologo);
 
-            TurnoDTO turnoGuardado = turnoService.registrarTurno(turno);
+            Turno turnoGuardado = turnoService.guardarTurno(turno);
+            System.out.println(">>> TURNO GUARDADO: " + turnoGuardado.toString());
 
             return ResponseEntity.ok(turnoGuardado);
         } else {
@@ -64,13 +66,13 @@ public class TurnoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<TurnoDTO>> listarTodosLosTurnos(){
-        return ResponseEntity.ok(turnoService.listarTodos());
+    public ResponseEntity<List<Turno>> listarTodosLosTurnos(){
+        return ResponseEntity.ok(turnoService.buscarTodos());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<TurnoDTO> buscarTurnoPorId(@PathVariable Long id) throws ResourceNotFoundException {
-        Optional<TurnoDTO> turnoBuscado = turnoService.buscarTurnoDTOId(id);
+    public ResponseEntity<Turno> buscarTurnoPorId(@PathVariable Long id) throws ResourceNotFoundException {
+        Optional<Turno> turnoBuscado = turnoService.buscarPorID(id);
         if(turnoBuscado.isPresent()){
             return ResponseEntity.ok(turnoBuscado.get());
         }else{
@@ -79,8 +81,8 @@ public class TurnoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TurnoDTO> actualizarTurno(@PathVariable Long id, @RequestBody Turno turno) throws ResourceNotFoundException {
-        Optional<Turno> turnoExistenteOpt = turnoService.buscarTurnoId(id);
+    public ResponseEntity<Turno> actualizarTurno(@PathVariable Long id, @RequestBody Turno turno) throws ResourceNotFoundException {
+        Optional<Turno> turnoExistenteOpt = turnoService.buscarPorID(id);
 
         Long pacienteId = (long) -1;
         Long odontologoId = (long) -1;
@@ -106,14 +108,10 @@ public class TurnoController {
                 Odontologo odontologo = odontologoOpt.get();
 
                 turnoExistente.setPaciente(paciente);
-                //turnoExistente.setPacienteId(paciente.getId());
-                
                 turnoExistente.setOdontologo(odontologo);
-                //turnoExistente.setOdontologoId(odontologo.getId());
-                
                 turnoExistente.setFecha(turno.getFecha());
 
-                TurnoDTO turnoActualizado = turnoService.registrarTurno(turnoExistente);
+                Turno turnoActualizado = turnoService.guardarTurno(turnoExistente);
 
                 return ResponseEntity.ok(turnoActualizado);
             }
@@ -125,10 +123,10 @@ public class TurnoController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminarTurno(@PathVariable Long id) throws ResourceNotFoundException {
-        Optional<TurnoDTO> turnoBuscado = turnoService.buscarTurnoDTOId(id);
+        Optional<Turno> turnoBuscado = turnoService.buscarPorID(id);
 
-        Long pacienteId = turnoBuscado.get().getPacienteId();
-        Long odontologoId = turnoBuscado.get().getOdontologoId();
+        Long pacienteId = turnoBuscado.get().getPaciente().getId();
+        Long odontologoId = turnoBuscado.get().getOdontologo().getId();
 
         Optional<Paciente> pacienteOpt = pacienteService.buscarPorID(pacienteId);
         Optional<Odontologo> odontologoOpt = odontologoService.buscarPorID(odontologoId);
